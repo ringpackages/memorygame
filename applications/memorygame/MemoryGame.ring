@@ -3,16 +3,16 @@
 # Author : Gal Zsolt (~ CalmoSoft ~)
 # Email   : <calmosoft@gmail.com>
 
-load "stdlib.ring"
-load "guilib.ring"
+load "stdlibcore.ring"
+load "lightguilib.ring"
 
 size = 8
 limit = 5
 nScore = 0
 bsumold = 0
 bsumnew = 1
-buttonold = newlist(size,size)
-buttonnew = newlist(size,size)
+buttonold = list(size,size)
+buttonnew = list(size,size)
 LayoutButtonRow = list(size)
 winwidth = 0
 winheight = 0
@@ -21,6 +21,7 @@ app = new qApp {
           StyleFusion()
           processevents()
           win = new qWidget() {
+		  setWinIcon(self,"memory.png")
                   setWindowTitle('Memory Game')
                   setgeometry(100,100,600,600)
                   setminimumwidth(300)
@@ -89,7 +90,7 @@ func pbegin()
        bsumold = 0
        bsumnew = 0
        playerscore.settext("Play Score:")
-       buttonnew = newlist(size,size)
+       buttonnew = list(size,size)
        for n = 1 to limit
             rx = random(size-1)+1
             ry = random(size-1)+1
@@ -112,7 +113,7 @@ func pbegin()
         next
         see nl
         app.processevents()
-        sleep(3)
+        sleep(1)
         for n = 1 to size
              for m = 1 to size
                   if buttonnew[n][m] = 1
